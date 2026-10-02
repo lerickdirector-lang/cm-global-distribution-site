@@ -63,6 +63,18 @@
         <h2 class="form-part">About you</h2>
         <div class="form-row">
           <div class="field">
+            <label for="first_name">First name <span class="req" aria-hidden="true">*</span></label>
+            <input id="first_name" name="first_name" required aria-describedby="first_name-error" type="text" autocomplete="given-name">
+            <p class="error" id="first_name-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="last_name">Last name <span class="req" aria-hidden="true">*</span></label>
+            <input id="last_name" name="last_name" required aria-describedby="last_name-error" type="text" autocomplete="family-name">
+            <p class="error" id="last_name-error" role="alert"></p>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
             <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
             <input id="email" name="email" required aria-describedby="email-error" type="email" autocomplete="email">
             <p class="error" id="email-error" role="alert"></p>
@@ -74,34 +86,29 @@
             <p class="error" id="phone-error" role="alert"></p>
           </div>
         </div>
-        <div class="form-row">
-          <div class="field">
-            <label for="first_name">First name</label>
-            <input id="first_name" name="first_name" aria-describedby="first_name-hint" type="text" autocomplete="given-name">
-            <p class="hint" id="first_name-hint">Optional</p>
-          </div>
-          <div class="field">
-            <label for="last_name">Last name</label>
-            <input id="last_name" name="last_name" aria-describedby="last_name-hint" type="text" autocomplete="family-name">
-            <p class="hint" id="last_name-hint">Optional</p>
-          </div>
-        </div>
 
         <h2 class="form-part"><span class="part-default">Your business</span><span data-side="brand" hidden>Your brand</span></h2>
         <div class="form-row">
           <div class="field">
-            <label for="company"><span class="side-default">Company or brand name</span><span data-side="trade" hidden>Company name</span><span data-side="brand" hidden>Brand or company name</span></label>
-            <input id="company" name="company" aria-describedby="company-hint" type="text" autocomplete="organization">
-            <p class="hint" id="company-hint">Optional</p>
+            <label for="company"><span class="side-default">Company or brand name</span><span data-side="trade" hidden>Company name</span><span data-side="brand" hidden>Brand or company name</span> <span class="req" aria-hidden="true">*</span></label>
+            <input id="company" name="company" required aria-describedby="company-error" type="text" autocomplete="organization">
+            <p class="error" id="company-error" role="alert"></p>
           </div>
           <div class="field">
+            <label for="company_number">Company registration number <span class="req" aria-hidden="true">*</span></label>
+            <input id="company_number" name="company_number" required aria-describedby="company_number-hint company_number-error" type="text">
+            <p class="hint" id="company_number-hint">Your Companies House number, or your business registration number outside the UK</p>
+            <p class="error" id="company_number-error" role="alert"></p>
+          </div>
+        </div>
+        <div class="field">
             <label for="website">Website</label>
             <input id="website" name="website" aria-describedby="website-hint" type="url" autocomplete="url" inputmode="url" placeholder="https://">
             <p class="hint" id="website-hint">Optional</p>
           </div>
-        </div>
 
         <div class="side-fields" data-side="trade" hidden>
+          <div class="form-row">
           <div class="field">
             <label for="enquiry_type">Type of business <span class="req" aria-hidden="true">*</span></label>
             <select id="enquiry_type" name="enquiry_type" required aria-describedby="enquiry_type-error">
@@ -113,16 +120,10 @@
             </select>
             <p class="error" id="enquiry_type-error" role="alert"></p>
           </div>
-          <div class="form-row">
           <div class="field">
             <label for="vat_number">VAT number</label>
             <input id="vat_number" name="vat_number" aria-describedby="vat_number-hint" type="text">
             <p class="hint" id="vat_number-hint">Optional</p>
-          </div>
-          <div class="field">
-            <label for="company_number">Company number</label>
-            <input id="company_number" name="company_number" aria-describedby="company_number-hint" type="text">
-            <p class="hint" id="company_number-hint">Optional</p>
           </div>
         </div>
           <h2 class="form-part">Buying and delivery</h2>

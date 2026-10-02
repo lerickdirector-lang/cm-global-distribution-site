@@ -224,6 +224,8 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mqpajwpl';
   const pick = (msg) => (v) => (v ? '' : msg);
   const checks = {
     side: () => (chosenSide() ? '' : 'Choose whether you’re a trade buyer or a brand owner.'),
+    first_name: (v) => (v.trim() ? '' : 'Enter your first name.'),
+    last_name: (v) => (v.trim() ? '' : 'Enter your last name.'),
     phone: (v) => {
       if (!v.trim()) return ''; // optional: we work online, so email is enough
       return v.replace(/\D/g, '').length >= 7 ? '' : 'Enter a full phone number, including the area code.';
@@ -232,6 +234,8 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mqpajwpl';
       if (!v.trim()) return 'Enter your email address.';
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Enter an email address like name@company.com.';
     },
+    company: (v) => (v.trim() ? '' : chosenSide() === 'brand' ? 'Enter your brand or company name.' : 'Enter your company name.'),
+    company_number: (v) => (v.replace(/[^0-9a-z]/gi, '').length >= 4 ? '' : 'Enter your company registration number.'),
     // Trade buyers
     enquiry_type: pick('Choose your type of business.'),
     category: pick('Tell us the brands or product types you buy.'),
