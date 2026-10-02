@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | CM Global Distribution</title>
+  <meta name="description" content="Contact CM Global Distribution about a trade account or a brand partnership.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CM Global Distribution">
+  <meta property="og:title" content="Contact | CM Global Distribution">
+  <meta property="og:description" content="Contact CM Global Distribution about a trade account or a brand partnership.">
+  <link rel="canonical" href="https://cmglobaldistribution.co.uk/contact.html">
+  <meta property="og:url" content="https://cmglobaldistribution.co.uk/contact.html">
+  <meta property="og:image" content="https://cmglobaldistribution.co.uk/assets/brand/link-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#00052e">
+  <link rel="preload" href="assets/fonts/hanken-grotesk-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/hanken-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="contact-page">
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="logo" href="index.html" aria-label="CM Global Distribution, home">
+          <svg viewBox="0 0 104 100" aria-hidden="true"><path d="M87.51 27A44 44 0 1 0 87.51 73L77.69 73A36 36 0 1 1 77.69 27Z" fill="#fff"/><path d="M40 51Q62 34 88 44" fill="none" stroke="#34fcff" stroke-width="6" stroke-linecap="round"/><circle cx="96" cy="48" r="4.5" fill="#34fcff"/><circle cx="31" cy="57" r="11" fill="none" stroke="#fff" stroke-width="3"/><circle cx="31" cy="57" r="5" fill="#fff"/></svg>
+          <span class="logo-text"><span>CM Global</span><span>Distribution</span></span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+        <nav class="menu" id="menu" aria-label="Main">
+          <ul>
+            <li><a href="trade.html">For buyers</a></li>
+            <li><a href="brands.html">For brands</a></li>
+            <li><a href="faqs.html">FAQs</a></li>
+          </ul>
+          <a class="btn btn-line" href="contact.html" aria-current="page">Get in touch</a>
+        </nav>
+      </div>
+    </header>
+  <main id="main">
+    <div class="wrap contact-intro">
+      <h1 class="display" id="contact-title">Tell us what you need.</h1>
+      <p class="lede" id="contact-lede">Whether you buy stock for resale or own a brand, a person reads every enquiry and will come back to you.</p>
+      <p class="contact-direct">Or email <a href="mailto:info@cmglobaldistribution.co.uk">info@cmglobaldistribution.co.uk</a></p>
+    </div>
+
+    <div class="wrap">
+      <form class="form" id="enquiry" novalidate>
+        <fieldset class="side-picker" tabindex="-1">
+          <legend>I&rsquo;m getting in touch as <span class="req" aria-hidden="true">*</span></legend>
+          <div class="segmented">
+            <input type="radio" id="side-trade" name="side" value="trade" aria-describedby="side-error"><label for="side-trade">A trade buyer<span>I buy stock to resell</span></label>
+            <input type="radio" id="side-brand" name="side" value="brand" aria-describedby="side-error"><label for="side-brand">A brand owner<span>I own or manage a brand</span></label>
+          </div>
+          <p class="error" id="side-error" role="alert"></p>
+        </fieldset>
+
+        <h2 class="form-part">About you</h2>
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" required aria-describedby="email-error" type="email" autocomplete="email">
+            <p class="error" id="email-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" aria-describedby="phone-hint phone-error" type="tel" autocomplete="tel">
+            <p class="hint" id="phone-hint">Optional</p>
+            <p class="error" id="phone-error" role="alert"></p>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="first_name">First name</label>
+            <input id="first_name" name="first_name" aria-describedby="first_name-hint" type="text" autocomplete="given-name">
+            <p class="hint" id="first_name-hint">Optional</p>
+          </div>
+          <div class="field">
+            <label for="last_name">Last name</label>
+            <input id="last_name" name="last_name" aria-describedby="last_name-hint" type="text" autocomplete="family-name">
+            <p class="hint" id="last_name-hint">Optional</p>
+          </div>
+        </div>
+
+        <h2 class="form-part"><span class="part-default">Your business</span><span data-side="brand" hidden>Your brand</span></h2>
+        <div class="form-row">
+          <div class="field">
+            <label for="company"><span class="side-default">Company or brand name</span><span data-side="trade" hidden>Company name</span><span data-side="brand" hidden>Brand or company name</span></label>
+            <input id="company" name="company" aria-describedby="company-hint" type="text" autocomplete="organization">
+            <p class="hint" id="company-hint">Optional</p>
+          </div>
+          <div class="field">
+            <label for="website">Website</label>
+            <input id="website" name="website" aria-describedby="website-hint" type="url" autocomplete="url" inputmode="url" placeholder="https://">
+            <p class="hint" id="website-hint">Optional</p>
+          </div>
+        </div>
+
+        <div class="side-fields" data-side="trade" hidden>
+          <div class="field">
+            <label for="enquiry_type">Type of business <span class="req" aria-hidden="true">*</span></label>
+            <select id="enquiry_type" name="enquiry_type" required aria-describedby="enquiry_type-error">
+              <option value="">Choose one</option>
+              <option value="wholesaler">Wholesaler</option>
+              <option value="distributor">Distributor</option>
+              <option value="retailer">Retailer</option>
+              <option value="other">Something else</option>
+            </select>
+            <p class="error" id="enquiry_type-error" role="alert"></p>
+          </div>
+          <div class="form-row">
+          <div class="field">
+            <label for="vat_number">VAT number</label>
+            <input id="vat_number" name="vat_number" aria-describedby="vat_number-hint" type="text">
+            <p class="hint" id="vat_number-hint">Optional</p>
+          </div>
+          <div class="field">
+            <label for="company_number">Company number</label>
+            <input id="company_number" name="company_number" aria-describedby="company_number-hint" type="text">
+            <p class="hint" id="company_number-hint">Optional</p>
+          </div>
+        </div>
+          <h2 class="form-part">Buying and delivery</h2>
+          <div class="field">
+            <label for="category">What you buy <span class="req" aria-hidden="true">*</span></label>
+            <input id="category" name="category" required aria-describedby="category-error" type="text" placeholder="Brands or product types">
+            <p class="error" id="category-error" role="alert"></p>
+          </div>
+          <div class="form-row">
+          <div class="field">
+            <label for="markets">Delivery needed to <span class="req" aria-hidden="true">*</span></label>
+            <select id="markets" name="markets" required aria-describedby="markets-error">
+              <option value="">Choose one</option>
+              <option>UK</option>
+              <option>EU</option>
+              <option>UK and EU</option>
+            </select>
+            <p class="error" id="markets-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="volume">Monthly volume <span class="req" aria-hidden="true">*</span></label>
+            <select id="volume" name="volume" required aria-describedby="volume-error">
+              <option value="">Choose one</option>
+              <option>Under &pound;5,000</option>
+              <option>&pound;5,000 to &pound;20,000</option>
+              <option>&pound;20,000 to &pound;50,000</option>
+              <option>Over &pound;50,000</option>
+              <option>Not sure yet</option>
+            </select>
+            <p class="error" id="volume-error" role="alert"></p>
+          </div>
+        </div>
+        </div>
+
+        <div class="side-fields" data-side="brand" hidden>
+          <div class="field">
+            <label for="brand_category">Your range <span class="req" aria-hidden="true">*</span></label>
+            <input id="brand_category" name="brand_category" required aria-describedby="brand_category-error" type="text" placeholder="What the range covers">
+            <p class="error" id="brand_category-error" role="alert"></p>
+          </div>
+          <div class="form-row">
+          <div class="field">
+            <label for="current_markets">Where you sell today <span class="req" aria-hidden="true">*</span></label>
+            <select id="current_markets" name="current_markets" required aria-describedby="current_markets-error">
+              <option value="">Choose one</option>
+              <option>Our home market only</option>
+              <option>Already in the UK</option>
+              <option>Already in the EU</option>
+              <option>UK and EU</option>
+              <option>Not selling yet</option>
+            </select>
+            <p class="error" id="current_markets-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="target_markets">Markets you want to reach <span class="req" aria-hidden="true">*</span></label>
+            <select id="target_markets" name="target_markets" required aria-describedby="target_markets-error">
+              <option value="">Choose one</option>
+              <option>UK</option>
+              <option>EU</option>
+              <option>UK and EU</option>
+            </select>
+            <p class="error" id="target_markets-error" role="alert"></p>
+          </div>
+        </div>
+        </div>
+
+        <h2 class="form-part">Your enquiry</h2>
+        <div class="field">
+          <label for="message">How can we help you? <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" required aria-describedby="message-hint message-error"></textarea>
+          <p class="hint" id="message-hint"><span data-side="trade" hidden>For example, specific lines, quantities or timings you need.</span><span data-side="brand" hidden>For example, what you want from a distributor, or pricing problems you already know about.</span></p>
+          <p class="error" id="message-error" role="alert"></p>
+        </div>
+
+        <button class="btn btn-signal btn-block" type="submit">Send enquiry</button>
+        <p class="hint form-next"><span class="next-default">We reply by email to the address you give.</span><span data-side="trade" hidden>We reply by email to the address you give. If anything more is needed before an account opens, we&rsquo;ll set it out in that reply.</span><span data-side="brand" hidden>We reply by email to the address you give, to arrange a conversation about your range.</span></p>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="email-box" aria-labelledby="email-box-title">
+        <div>
+          <h2 class="email-box-title" id="email-box-title">Prefer to email?</h2>
+          <p class="email-box-address">info@cmglobaldistribution.co.uk</p>
+        </div>
+        <div class="email-box-actions">
+          <a class="btn btn-line" href="mailto:info@cmglobaldistribution.co.uk">Email us</a>
+          <button class="btn btn-line" type="button" data-copy="info@cmglobaldistribution.co.uk">Copy address</button>
+          <span class="sr-only" role="status"></span>
+        </div>
+      </aside>
+    </div>
+  </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-cta">
+        <p class="footer-big">Start the conversation.</p>
+        <a class="btn btn-signal" href="contact.html">Get in touch</a>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <a class="logo" href="index.html" aria-label="CM Global Distribution, home">
+            <svg viewBox="0 0 104 100" aria-hidden="true"><path d="M87.51 27A44 44 0 1 0 87.51 73L77.69 73A36 36 0 1 1 77.69 27Z" fill="#fff"/><path d="M40 51Q62 34 88 44" fill="none" stroke="#34fcff" stroke-width="6" stroke-linecap="round"/><circle cx="96" cy="48" r="4.5" fill="#34fcff"/><circle cx="31" cy="57" r="11" fill="none" stroke="#fff" stroke-width="3"/><circle cx="31" cy="57" r="5" fill="#fff"/></svg>
+            <span class="logo-text"><span>CM Global</span><span>Distribution</span></span>
+          </a>
+          <p>A UK wholesaler of recognised brands, for the trade and for brand owners.</p>
+          <a class="footer-mail" href="mailto:info@cmglobaldistribution.co.uk">info@cmglobaldistribution.co.uk</a>
+        </div>
+        <nav aria-label="Footer">
+          <h2 class="footer-h">Pages</h2>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="trade.html">For buyers</a></li>
+            <li><a href="brands.html">For brands</a></li>
+            <li><a href="faqs.html">FAQs</a></li>
+            <li><a href="policies.html">Policies</a></li>
+            <li><a href="contact.html" aria-current="page">Get in touch</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="legal">CM Global Distribution is a trading name of Crep Millions LTD, registered in England and Wales, company number <span class="nowrap">13764987</span>. Registered office: 4th Floor, Silverstream House, 45 Fitzroy Street, London W1T 6EB. VAT number <span class="nowrap">GB 522 7677 76</span>.</p>
+      <p class="credit">&copy; 2026 Crep Millions LTD.</p>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>

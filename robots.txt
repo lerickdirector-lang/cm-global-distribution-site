@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cmglobaldistribution.co.uk/sitemap.xml
