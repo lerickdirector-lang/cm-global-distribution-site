@@ -33,6 +33,67 @@ const SENT_MARK = `<svg class="form-done-mark" viewBox="0 0 180 76" aria-hidden=
           <g class="plane"><use href="#sent-plane"/><circle class="nav-port" cx="-7.6" cy="-14.6" r="0.9"/><circle class="nav-starboard" cx="-7.6" cy="14.6" r="0.9"/><circle class="strobe" cx="-14.9" cy="0" r="0.8"/></g>
         </svg>`;
 
+// ---------- Page not found: the 0 of 404 is a turning globe, with the cargo plane circling it ----------
+// Drawn as wireframe like the home page: the globe turns slowly on its axis, seen from a little
+// above, and the plane flies a tilted orbit, passing behind the globe and back out in front.
+(() => {
+  const svg = document.querySelector('.lost-globe');
+  if (!svg) return;
+  const R = 78, TILT = 0.36, NS = 'http://www.w3.org/2000/svg';
+  const back = svg.querySelector('.globe-back'), front = svg.querySelector('.globe-front');
+  const make = (parent, cls) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('class', cls); parent.appendChild(p); return p; };
+  // a point on the sphere, turned by `spin` about its axis and tipped towards the viewer
+  const project = (lat, lon) => {
+    const x = R * Math.cos(lat) * Math.sin(lon), y = R * Math.sin(lat), z = R * Math.cos(lat) * Math.cos(lon);
+    return [x, -(y * Math.cos(TILT) - z * Math.sin(TILT)), y * Math.sin(TILT) + z * Math.cos(TILT)];
+  };
+  const trace = (pts, wantFront) => {
+    let d = '', pen = false;
+    for (const [x, y, z] of pts) {
+      if ((z >= 0) === wantFront) { d += `${pen ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`; pen = true; } else pen = false;
+    }
+    return d;
+  };
+  const deg = Math.PI / 180;
+  // parallels stay put; meridians turn
+  [-60, -30, 0, 30, 60].forEach((lat) => {
+    const pts = []; for (let lon = 0; lon <= 360; lon += 6) pts.push(project(lat * deg, lon * deg));
+    make(back, 'line').setAttribute('d', trace(pts, false));
+    make(front, 'line').setAttribute('d', trace(pts, true));
+  });
+  const meridians = [0, 30, 60, 90, 120, 150].map((lon) => ({ lon, b: make(back, 'line'), f: make(front, 'line') }));
+  const drawGlobe = (spin) => meridians.forEach((m) => {
+    const pts = []; for (let lat = -90; lat <= 90; lat += 6) pts.push(project(lat * deg, m.lon * deg + spin));
+    const ring = pts.concat(pts.map(([x, y, z]) => [-x, y, -z]).reverse()); // the far half of the same great circle
+    m.b.setAttribute('d', trace(ring, false)); m.f.setAttribute('d', trace(ring, true));
+  });
+
+  // the plane, drawn once and moved between the far and near side of its orbit
+  const plane = document.createElementNS(NS, 'g');
+  plane.setAttribute('class', 'lost-plane');
+  plane.innerHTML = `${PLANE_TOP}<circle class="nav-port" cx="-7.6" cy="-14.6" r="0.9"/><circle class="nav-starboard" cx="-7.6" cy="14.6" r="0.9"/>`;
+  const behind = svg.querySelector('.orbit-back'), ahead = svg.querySelector('.orbit-front');
+  const placePlane = (a) => {
+    const x = 108 * Math.cos(a), y = 30 * Math.sin(a), near = y > 0;
+    const heading = Math.atan2(30 * Math.cos(a), -108 * Math.sin(a)) * 180 / Math.PI;
+    const size = 1.6 + 0.7 * (Math.sin(a) + 1) / 2; // nearer, so larger
+    (near ? ahead : behind).appendChild(plane);
+    plane.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${heading.toFixed(1)}) scale(${size.toFixed(3)})`);
+    plane.style.opacity = near ? 1 : 0.55;
+  };
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { drawGlobe(0.4); placePlane(1.2); return; }
+  let t0 = null;
+  const frame = (now) => {
+    if (t0 === null) t0 = now;
+    const s = (now - t0) / 1000;
+    drawGlobe(s * (2 * Math.PI / 40)); // one turn every 40 seconds
+    placePlane(1.2 - s * (2 * Math.PI / 9)); // one lap every 9 seconds
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+})();
+
 function flyTick(panel) {
   const svg = panel.querySelector('.form-done-mark');
   if (!svg) return;

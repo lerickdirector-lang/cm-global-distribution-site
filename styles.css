@@ -853,6 +853,20 @@ p .text-link, li .text-link, dd .text-link { padding-block: 12px; }
 .side-picker:focus { outline: none; }
 .side-picker:focus-visible { outline: 2px solid var(--halo); outline-offset: 6px; border-radius: 10px; }
 
+/* Page not found: the number, large, with a globe for its 0 and the cargo plane circling it */
+.lost-code { display: flex; align-items: center; gap: 0.02em; font-family: var(--display); font-weight: 300; font-size: clamp(120px, 20vw, 250px); line-height: 1; color: var(--on-ink); letter-spacing: -0.02em; margin-top: clamp(8px, 2vw, 24px); }
+.lost-code > span { display: block; }
+.lost-globe { width: 0.92em; height: auto; overflow: visible; margin-inline: -0.06em; }
+.lost-globe .globe-disc { fill: var(--ink); stroke: var(--cyan); stroke-width: 1.4; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 10px rgba(52, 252, 255, 0.35)); }
+.lost-globe .line { fill: none; stroke: var(--cyan); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.lost-globe .globe-back .line { stroke-opacity: 0.18; }
+.lost-globe .globe-front .line { stroke-opacity: 0.6; }
+.lost-globe .orbit { fill: none; stroke: var(--cyan); stroke-opacity: 0.3; stroke-width: 1; stroke-dasharray: 2 5; vector-effect: non-scaling-stroke; }
+.lost-plane path { fill: var(--ink); stroke: var(--cyan); stroke-width: 0.9; stroke-linejoin: round; filter: drop-shadow(0 0 1.2px rgba(52, 252, 255, 0.55)); }
+.lost-plane .nav-port { fill: #ff4d5e; }
+.lost-plane .nav-starboard { fill: #3dff9a; }
+.page-head:has(.lost-code) .head-grid { margin-top: clamp(4px, 1vw, 12px); }
+
 /* Page not found: a delivery note, stamped as it lands, and the five places worth going instead */
 .lost-note { width: clamp(150px, 17vw, 200px); margin: 0 clamp(16px, 4vw, 56px) 4px auto; }
 .lost-note .sheet { gap: 12px; padding: 18px 16px 16px; }
