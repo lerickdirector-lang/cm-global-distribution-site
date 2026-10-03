@@ -853,7 +853,20 @@ p .text-link, li .text-link, dd .text-link { padding-block: 12px; }
 .side-picker:focus { outline: none; }
 .side-picker:focus-visible { outline: 2px solid var(--halo); outline-offset: 6px; border-radius: 10px; }
 
-/* Page not found: the five places worth going instead */
+/* Page not found: a delivery note, stamped as it lands, and the five places worth going instead */
+.lost-note { width: clamp(150px, 17vw, 200px); margin: 0 clamp(16px, 4vw, 56px) 4px auto; }
+.lost-note .sheet { gap: 12px; padding: 18px 16px 16px; }
+.lost-note .sheet b { font-size: 0.8125rem; }
+.lost-note .sheet-code { height: 24px; }
+.lost-note .sheet .stamp { right: -30px; bottom: 46px; padding: 4px 10px; font-size: 0.8125rem; white-space: nowrap; animation: stamp-down 0.55s 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes stamp-down {
+  0% { opacity: 0; transform: rotate(-12deg) scale(1.9); }
+  65% { opacity: 1; transform: rotate(-12deg) scale(0.95); }
+  100% { opacity: 1; transform: rotate(-12deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .lost-note .sheet .stamp { animation: none; } }
+@media (max-width: 960px) { .lost-note { width: 150px; margin: 8px 0 0 4px; } }
+.lost-title { font-family: var(--display); font-weight: 300; font-size: clamp(1.25rem, 2vw, 1.5rem); color: var(--on-ink); margin-bottom: 20px; }
 .band-lost { padding-top: 0; }
 .lost-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .lost-links a { display: block; height: 100%; padding: 22px 24px; border: 1px solid var(--line-ink); border-radius: 8px; color: var(--on-ink); text-decoration: none; transition: border-color 0.2s, background-color 0.2s; }
