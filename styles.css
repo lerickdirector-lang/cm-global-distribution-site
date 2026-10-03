@@ -803,12 +803,15 @@ p .text-link, li .text-link, dd .text-link { padding-block: 12px; }
 .form-done:focus { outline: none; }
 .form-done h2 { font-family: var(--display); font-weight: 300; font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--on-ink); }
 .form-done strong { font-weight: 400; color: var(--on-ink); overflow-wrap: anywhere; }
-.form-done-mark { width: 200px; height: auto; overflow: visible; margin: 0 0 4px -10px; }
+.form-done-mark { width: min(250px, 100%); height: auto; overflow: visible; margin: 0 0 4px -12px; }
 .form-done-mark .approach, .form-done-mark .climb { fill: none; stroke: none; }
 .form-done-mark .tick { fill: none; stroke: var(--cyan); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 5px rgba(52, 252, 255, 0.45)); }
-.form-done-mark .plane { opacity: 0; }
-.form-done-mark .plane path { fill: var(--ink); stroke: var(--cyan); stroke-width: 0.9; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.form-done-mark .plane .rib { fill: none; stroke-opacity: 0.55; }
+.form-done-mark .plane, .form-done-mark .plane-shadow { opacity: 0; }
+.form-done-mark .plane use { fill: var(--ink); stroke: var(--cyan); stroke-width: 0.9; stroke-linejoin: round; filter: drop-shadow(0 0 1.2px rgba(52, 252, 255, 0.55)); }
+.form-done-mark .plane-shadow use { fill: #000; stroke: none; filter: blur(0.8px); }
+.form-done-mark .nav-port { fill: #ff4d5e; filter: drop-shadow(0 0 1.4px #ff4d5e); }
+.form-done-mark .nav-starboard { fill: #3dff9a; filter: drop-shadow(0 0 1.4px #3dff9a); }
+.form-done-mark .strobe { fill: #fff; opacity: 0; filter: drop-shadow(0 0 2px #fff); }
 .form-done-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
 
 /* Footer: on pages that end with their own button, the email line is the quieter of the two */

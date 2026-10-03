@@ -9,37 +9,52 @@ const PLANE_TOP = (() => {
   const sides = (f) => f(1) + f(-1);
   const wing = (rootLE, rootTE, tipLE, tipTE, ribs, cls) => sides((s) => {
     const m = ([x, z]) => [z, x * s];
-    let d = `<path class="${cls}" d="${P([rootLE, tipLE, tipTE, rootTE].map(m))}"/>`;
+    let d = `<path d="${P([rootLE, tipLE, tipTE, rootTE].map(m))}"/>`;
     for (let i = 1; i < ribs; i++) {
       const t = i / ribs, a = [rootLE[0] + (tipLE[0] - rootLE[0]) * t, rootLE[1] + (tipLE[1] - rootLE[1]) * t], b = [rootTE[0] + (tipTE[0] - rootTE[0]) * t, rootTE[1] + (tipTE[1] - rootTE[1]) * t];
-      d += `<path class="rib" d="${P([a, b].map(m), false)}"/>`;
+      d += `<path fill="none" stroke-opacity="0.55" d="${P([a, b].map(m), false)}"/>`;
     }
     return d;
   });
   const engines = sides((s) => [[46, -4], [92, -30]].map(([x, z]) => `<path d="${P([[z + 13, (x - 6) * s], [z + 13, (x + 6) * s], [z - 13, (x + 6) * s], [z - 13, (x - 6) * s]])}"/>`).join(''));
   const body = '<path d="M14.2 0 C14.2 0.9 11 1.3 9 1.3 L-8 1.3 L-14.6 0.36 L-14.6 -0.36 L-8 -1.3 L9 -1.3 C11 -1.3 14.2 -0.9 14.2 0 Z"/>';
   // order: the wings and engines first, the body over them
-  return wing([12, 18], [12, -32], [146, -62], [146, -80], 5, 'wing') + wing([8, -104], [8, -132], [56, -140], [56, -152], 2, 'wing') + engines + body;
+  return (wing([12, 18], [12, -32], [146, -62], [146, -80], 5) + wing([8, -104], [8, -132], [56, -140], [56, -152], 2) + engines + body)
+    .replaceAll('<path ', '<path vector-effect="non-scaling-stroke" '); // hairlines at any size
 })();
+// Navigation lights as on a real aircraft: red on the left wingtip, green on the right, and a white
+// strobe at the tail
 const SENT_MARK = `<svg class="form-done-mark" viewBox="0 0 180 76" aria-hidden="true" focusable="false">
+          <defs><g id="sent-plane">${PLANE_TOP}</g></defs>
           <path class="approach" d="M6 22 C18 22 32 33.5 40 42"/>
           <path class="tick" d="M40 42 L57 60 Q63 66 69 60 L116 16"/>
           <path class="climb" d="M116 16 C122 10.4 132 6 148 6"/>
-          <g class="plane">${PLANE_TOP}</g>
+          <g class="plane-shadow"><use href="#sent-plane"/></g>
+          <g class="plane"><use href="#sent-plane"/><circle class="nav-port" cx="-7.6" cy="-14.6" r="0.9"/><circle class="nav-starboard" cx="-7.6" cy="14.6" r="0.9"/><circle class="strobe" cx="-14.9" cy="0" r="0.8"/></g>
         </svg>`;
 
 function flyTick(panel) {
   const svg = panel.querySelector('.form-done-mark');
   if (!svg) return;
   const [approach, tick, climb] = ['.approach', '.tick', '.climb'].map((q) => svg.querySelector(q));
-  const plane = svg.querySelector('.plane');
+  const plane = svg.querySelector('.plane'), shadow = svg.querySelector('.plane-shadow'), strobe = svg.querySelector('.strobe');
   const la = approach.getTotalLength(), lt = tick.getTotalLength(), lc = climb.getTotalLength(), total = la + lt + lc;
   const text = [...panel.children].filter((el) => el !== svg);
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { plane.style.display = 'none'; return; } // the tick, already drawn
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { plane.style.display = 'none'; shadow.style.display = 'none'; return; } // the tick, already drawn
   tick.style.strokeDasharray = `${lt} ${lt}`;
   tick.style.strokeDashoffset = lt;
   const at = (d) => (d < la ? approach.getPointAtLength(d) : d < la + lt ? tick.getPointAtLength(d - la) : climb.getPointAtLength(Math.min(lc, d - la - lt)));
-  const DURATION = 2100;
+  const DURATION = 2300;
+  // Height above the ground, 0 to 1: it comes in high, dips low into the turn at the bottom of the
+  // tick, and climbs away. Seen from above, a higher plane looks bigger and its shadow falls further off.
+  const valley = la + lt * 0.36;
+  const heights = [[0, 1], [la, 0.6], [valley, 0.22], [la + lt, 0.8], [total, 1.1]];
+  const height = (d) => {
+    const i = Math.max(1, heights.findIndex(([at]) => at >= d));
+    const [d0, h0] = heights[i - 1], [d1, h1] = heights[i];
+    const t = Math.min(1, Math.max(0, (d - d0) / (d1 - d0 || 1)));
+    return h0 + (h1 - h0) * t * t * (3 - 2 * t);
+  };
   const ease = (t) => 0.5 - Math.cos(Math.PI * t) / 2; // one smooth glide: eases in, cruises, eases out
   let start = null, lastAngle = null, bank = 0;
   const frame = (now) => {
@@ -51,11 +66,16 @@ function flyTick(panel) {
     if (lastAngle !== null) bank += (Math.min(1, Math.abs(angle - lastAngle) / 2.2) - bank) * 0.18;
     lastAngle = angle;
     const fade = Math.min(1, d / (la * 0.7), (total - d) / (lc * 0.8));
-    plane.setAttribute('transform', `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)}) rotate(${angle.toFixed(2)}) scale(1.25 ${(1.25 * (1 - 0.28 * bank)).toFixed(3)})`);
+    const h = height(d), size = 1.45 * (0.8 + 0.3 * h), across = (size * (1 - 0.28 * bank)).toFixed(3);
+    const pose = `rotate(${angle.toFixed(2)}) scale(${size.toFixed(3)} ${across})`;
+    plane.setAttribute('transform', `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)}) ${pose}`);
+    shadow.setAttribute('transform', `translate(${(p.x + 3 + 9 * h).toFixed(2)} ${(p.y + 4 + 12 * h).toFixed(2)}) ${pose}`);
     plane.style.opacity = Math.max(0, fade).toFixed(3);
+    shadow.style.opacity = (Math.max(0, fade) * (0.55 - 0.3 * h)).toFixed(3);
+    strobe.style.opacity = (now - start) % 900 < 70 ? 1 : 0; // a short white flash, about once a second
     tick.style.strokeDashoffset = lt - Math.max(0, Math.min(lt, d - la));
     if (t < 1) requestAnimationFrame(frame);
-    else plane.style.opacity = 0;
+    else { plane.style.opacity = 0; shadow.style.opacity = 0; }
   };
   requestAnimationFrame(frame);
   // the words settle in as the tick completes
