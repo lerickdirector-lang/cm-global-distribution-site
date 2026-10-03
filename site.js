@@ -374,7 +374,6 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mqpajwpl';
     // Trade buyers
     enquiry_type: pick('Choose your type of business.'),
     category: pick('Tell us the brands or product types you buy.'),
-    markets: pick('Choose where you need delivery.'),
     volume: pick('Choose your rough monthly volume.'),
     // Brand owners
     brand_category: pick('Tell us about your range.'),
