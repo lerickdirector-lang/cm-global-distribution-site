@@ -333,6 +333,12 @@ html { scroll-padding-top: 112px; }
 .checklist svg { width: 18px; height: 18px; margin-top: 4px; color: var(--signal); }
 .checklist strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.12rem; color: var(--carbon); }
 .checklist span { color: var(--slate); }
+/* On the plain dark band the light-card colours would vanish, so use the dark-surface ones */
+.band:not(.band-light) .checklist { border-top-color: rgba(255, 255, 255, 0.16); }
+.band:not(.band-light) .checklist li { border-bottom-color: rgba(255, 255, 255, 0.16); }
+.band:not(.band-light) .checklist strong { color: var(--on-ink); }
+.band:not(.band-light) .checklist span { color: var(--on-ink-soft); }
+.band:not(.band-light) .checklist svg { color: var(--cyan); }
 
 /* CTA band */
 .cta { display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 40px; align-items: end; }
@@ -931,3 +937,62 @@ html.i18n-wait body { opacity: 0; } /* until the chosen language is in place, so
   .lang-list { left: 0; right: 0; width: auto; top: calc(100% + 8px); transform-origin: top center; }
 }
 @media (max-width: 400px) { .lang-button { gap: 6px; padding: 0 11px; } .lang-chevron { display: none; } }
+
+/* ---------- For brands: the price chart, the two supply chains and the channels ----------
+   The page turns on one idea, that controlled supply keeps a listing's price stable, so it
+   leads with a picture of exactly that: one line holding, one sliding. Drawn once, slowly and
+   level, as it comes into view; with reduced motion it is simply shown. */
+.price-card { margin: 0; padding: 22px 22px 18px; background: var(--ink); border: 1px solid var(--line-ink); border-radius: 12px; box-shadow: 0 24px 60px rgba(0, 3, 30, 0.45); }
+.price-card figcaption b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.15rem; color: var(--on-ink); }
+.price-card figcaption span { display: block; margin-top: 2px; font-size: 0.8125rem; color: var(--on-ink-soft); }
+.price-chart { display: block; width: 100%; height: auto; margin-top: 14px; overflow: visible; }
+.price-chart .grid line { stroke: var(--line-ink); stroke-width: 1; }
+.price-chart path { fill: none; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.price-chart .line-held { stroke: var(--cyan); filter: drop-shadow(0 0 6px rgba(52, 252, 255, 0.45)); }
+.price-chart .line-slide { stroke: var(--error-dark); stroke-dasharray: 0.012 0.018; opacity: 0.9; }
+.price-chart .dot-held { fill: var(--cyan); }
+.price-chart .dot-slide { fill: var(--error-dark); }
+.price-chart text { font-family: var(--mono); font-size: 13px; font-weight: 500; }
+.price-chart .val-held { fill: var(--cyan); }
+.price-chart .val-slide { fill: var(--error-dark); }
+.price-legend { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 6px; font-size: 0.875rem; color: var(--on-ink-soft); }
+.price-legend li { display: flex; align-items: center; gap: 10px; }
+.price-legend i { width: 18px; height: 3px; border-radius: 2px; flex: none; }
+.price-legend .is-held i { background: var(--cyan); }
+.price-legend .is-slide i { background: repeating-linear-gradient(90deg, var(--error-dark) 0 4px, transparent 4px 7px); }
+/* Drawing: the held line runs out level; the sliding one is masked in behind it */
+.price-card.is-waiting .line-held { stroke-dashoffset: 1; }
+.price-card.is-waiting .line-slide { clip-path: inset(0 100% 0 0); }
+.price-card.is-waiting .grid, .price-card.is-waiting circle, .price-card.is-waiting text { opacity: 0; }
+.price-card .line-held { transition: stroke-dashoffset 1.8s cubic-bezier(0.33, 0, 0.2, 1); }
+.price-card .line-slide { transition: clip-path 1.8s cubic-bezier(0.33, 0, 0.2, 1) 0.15s; }
+.price-card .grid { transition: opacity 0.6s ease; }
+.price-card circle, .price-card text { transition: opacity 0.5s ease 1.7s; }
+@media (prefers-reduced-motion: reduce) { .price-card *, .price-card .line-held, .price-card .line-slide { transition: none !important; } }
+
+.flows { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(16px, 2.4vw, 28px); }
+.flow { padding: clamp(22px, 2.6vw, 30px); border: 1px solid var(--line-ink); border-radius: 12px; background: rgba(6, 16, 90, 0.35); }
+.flow-held { border-color: rgba(52, 252, 255, 0.45); box-shadow: inset 0 0 0 1px rgba(52, 252, 255, 0.12); }
+.flow-title { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.085em; text-transform: uppercase; color: var(--on-ink-soft); }
+.flow-held .flow-title { color: var(--cyan-soft); }
+.chain { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+.chain li { position: relative; padding: 12px 16px; border-radius: 8px; background: var(--ink); border: 1px solid var(--line-ink); font-family: var(--display); font-size: 1.05rem; color: var(--on-ink); }
+.chain li span { display: block; margin-top: 2px; font-family: var(--body); font-size: 0.875rem; color: var(--on-ink-soft); }
+.chain li + li::before { content: ''; position: absolute; left: 24px; top: -11px; width: 2px; height: 10px; background: var(--line-ink); }
+.chain .is-risk { border-color: rgba(255, 154, 154, 0.55); }
+.chain .is-risk span { color: var(--error-dark); }
+.chain .is-us { border-color: var(--cyan); background: rgba(52, 252, 255, 0.08); }
+.chain .is-us span { color: var(--cyan-soft); }
+.flow-held .chain li + li::before { background: var(--cyan); }
+.flow-result { margin-top: 18px; font-size: 1rem; line-height: 1.55; color: var(--on-ink); }
+.flow-leak .flow-result { color: #ffd2d2; }
+
+.channels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px); }
+.channel { padding: clamp(22px, 2.4vw, 28px); border: 1px solid var(--silver); border-radius: 14px; background: rgba(0, 5, 46, 0.35); }
+.channel h3 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; color: var(--carbon); }
+.channel > p { margin-top: 8px; color: var(--slate); }
+.ticks-tight { margin-top: 18px; }
+.ticks-tight li { padding-block: 10px; }
+@media (max-width: 960px) {
+  .flows, .channels { grid-template-columns: minmax(0, 1fr); }
+}

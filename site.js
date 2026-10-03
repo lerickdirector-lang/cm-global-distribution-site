@@ -597,3 +597,18 @@ document.querySelectorAll('[data-tabs]').forEach((root) => {
   }, { rootMargin: '0px 0px -35% 0px' }); // lights up once its top is well into view, however tall it is
   io.observe(route);
 })();
+
+// For brands: the price chart draws itself once, when it first comes into view. Without
+// JavaScript, or with reduced motion, it is simply shown fully drawn.
+(() => {
+  const chart = document.querySelector('[data-price-chart]');
+  if (!chart || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  chart.classList.add('is-waiting');
+  const io = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    requestAnimationFrame(() => chart.classList.remove('is-waiting'));
+    io.disconnect();
+  }, { rootMargin: '0px 0px -15% 0px' });
+  io.observe(chart);
+})();
