@@ -1,5 +1,74 @@
 // Enquiries are sent through Formspree to info@cmglobaldistribution.co.uk. Emptying this makes the
 // form fall back to opening the visitor's own email app with the enquiry written out.
+// ---------- Enquiry sent: the homepage's cargo plane flies in and leaves a tick as its trail ----------
+// The plane is drawn from above in the same wireframe as the story on the home page (main wings
+// with their ribs, four engines, tailplane), scaled from that model's own measurements.
+const PLANE_TOP = (() => {
+  const k = 0.1; // the home page model is about 290 units long
+  const P = (pts, close = true) => `M${pts.map(([z, x]) => `${(z * k).toFixed(2)} ${(x * k).toFixed(2)}`).join(' L')}${close ? ' Z' : ''}`;
+  const sides = (f) => f(1) + f(-1);
+  const wing = (rootLE, rootTE, tipLE, tipTE, ribs, cls) => sides((s) => {
+    const m = ([x, z]) => [z, x * s];
+    let d = `<path class="${cls}" d="${P([rootLE, tipLE, tipTE, rootTE].map(m))}"/>`;
+    for (let i = 1; i < ribs; i++) {
+      const t = i / ribs, a = [rootLE[0] + (tipLE[0] - rootLE[0]) * t, rootLE[1] + (tipLE[1] - rootLE[1]) * t], b = [rootTE[0] + (tipTE[0] - rootTE[0]) * t, rootTE[1] + (tipTE[1] - rootTE[1]) * t];
+      d += `<path class="rib" d="${P([a, b].map(m), false)}"/>`;
+    }
+    return d;
+  });
+  const engines = sides((s) => [[46, -4], [92, -30]].map(([x, z]) => `<path d="${P([[z + 13, (x - 6) * s], [z + 13, (x + 6) * s], [z - 13, (x + 6) * s], [z - 13, (x - 6) * s]])}"/>`).join(''));
+  const body = '<path d="M14.2 0 C14.2 0.9 11 1.3 9 1.3 L-8 1.3 L-14.6 0.36 L-14.6 -0.36 L-8 -1.3 L9 -1.3 C11 -1.3 14.2 -0.9 14.2 0 Z"/>';
+  // order: the wings and engines first, the body over them
+  return wing([12, 18], [12, -32], [146, -62], [146, -80], 5, 'wing') + wing([8, -104], [8, -132], [56, -140], [56, -152], 2, 'wing') + engines + body;
+})();
+const SENT_MARK = `<svg class="form-done-mark" viewBox="0 0 180 76" aria-hidden="true" focusable="false">
+          <path class="approach" d="M6 22 C18 22 32 33.5 40 42"/>
+          <path class="tick" d="M40 42 L57 60 Q63 66 69 60 L116 16"/>
+          <path class="climb" d="M116 16 C122 10.4 132 6 148 6"/>
+          <g class="plane">${PLANE_TOP}</g>
+        </svg>`;
+
+function flyTick(panel) {
+  const svg = panel.querySelector('.form-done-mark');
+  if (!svg) return;
+  const [approach, tick, climb] = ['.approach', '.tick', '.climb'].map((q) => svg.querySelector(q));
+  const plane = svg.querySelector('.plane');
+  const la = approach.getTotalLength(), lt = tick.getTotalLength(), lc = climb.getTotalLength(), total = la + lt + lc;
+  const text = [...panel.children].filter((el) => el !== svg);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { plane.style.display = 'none'; return; } // the tick, already drawn
+  tick.style.strokeDasharray = `${lt} ${lt}`;
+  tick.style.strokeDashoffset = lt;
+  const at = (d) => (d < la ? approach.getPointAtLength(d) : d < la + lt ? tick.getPointAtLength(d - la) : climb.getPointAtLength(Math.min(lc, d - la - lt)));
+  const DURATION = 2100;
+  const ease = (t) => 0.5 - Math.cos(Math.PI * t) / 2; // one smooth glide: eases in, cruises, eases out
+  let start = null, lastAngle = null, bank = 0;
+  const frame = (now) => {
+    if (start === null) start = now;
+    const t = Math.min(1, (now - start) / DURATION), d = ease(t) * total;
+    const p = at(d), q = at(Math.min(total, d + 0.6)), r = at(Math.max(0, d - 0.6));
+    const angle = Math.atan2(q.y - r.y, q.x - r.x) * 180 / Math.PI;
+    // a plane leans into a turn: seen from above, its wings look narrower while it banks
+    if (lastAngle !== null) bank += (Math.min(1, Math.abs(angle - lastAngle) / 2.2) - bank) * 0.18;
+    lastAngle = angle;
+    const fade = Math.min(1, d / (la * 0.7), (total - d) / (lc * 0.8));
+    plane.setAttribute('transform', `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)}) rotate(${angle.toFixed(2)}) scale(1.25 ${(1.25 * (1 - 0.28 * bank)).toFixed(3)})`);
+    plane.style.opacity = Math.max(0, fade).toFixed(3);
+    tick.style.strokeDashoffset = lt - Math.max(0, Math.min(lt, d - la));
+    if (t < 1) requestAnimationFrame(frame);
+    else plane.style.opacity = 0;
+  };
+  requestAnimationFrame(frame);
+  // the words settle in as the tick completes
+  // (hidden straight away, so they never show for a frame before the plane has flown)
+  if (Element.prototype.animate) text.forEach((el, i) => {
+    el.style.opacity = 0;
+    el.animate(
+      [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }],
+      { duration: 600, delay: 1050 + i * 140, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)' },
+    ).finished.then(() => { el.style.opacity = ''; }, () => { el.style.opacity = ''; });
+  });
+}
+
 const FORM_ENDPOINT = 'https://formspree.io/f/mqpajwpl';
 
 // A page opened from a link always starts at the top. Only the back and forward buttons, or a
@@ -318,11 +387,12 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mqpajwpl';
       // sent twice by mistake
       const sentSide = chosenSide();
       const sentTo = form.elements.email.value.trim();
+      const firstName = form.elements.first_name.value.trim().replace(/^\p{Ll}/u, (c) => c.toUpperCase());
       const done = document.createElement('section');
       done.className = 'form-done';
       done.tabIndex = -1;
       done.setAttribute('aria-labelledby', 'form-done-title');
-      done.innerHTML = `<h2 id="form-done-title">Enquiry sent</h2>
+      done.innerHTML = `${SENT_MARK}<h2 id="form-done-title">Enquiry sent</h2>
         <p>${sentSide === 'brand' ? 'A member of the team will reply to <strong class="form-done-address"></strong> to arrange a conversation about your range.' : 'A member of the team will reply to <strong class="form-done-address"></strong>. If anything more is needed before your account opens, we&rsquo;ll set it out in that reply.'}</p>
         <div class="form-done-actions"><a class="btn btn-line" href="${sentSide === 'brand' ? 'brands.html' : 'trade.html'}">${sentSide === 'brand' ? 'Back to brand partnerships' : 'Back to trade accounts'}</a><button class="btn btn-line" type="button">Send another enquiry</button></div>`;
       done.querySelector('.form-done-address').textContent = sentTo;
@@ -333,7 +403,7 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mqpajwpl';
       form.after(done);
       // the page around it now reads as finished, and the email box as a follow-up
       const before = { title: title && title.textContent, lede: lede && lede.textContent, box: boxTitle && boxTitle.textContent };
-      if (title) title.textContent = 'Thank you.';
+      if (title) title.textContent = firstName ? `Thank you for your enquiry, ${firstName}.` : 'Thank you for your enquiry.';
       if (lede) lede.hidden = true; // the panel below says what happens next; once is enough
       if (boxTitle) boxTitle.textContent = 'Need to add something?';
       if (direct) direct.hidden = true; // the email route is offered once, below, as a follow-up
@@ -341,6 +411,7 @@ const FORM_ENDPOINT = 'https://formspree.io/f/mqpajwpl';
       // give the panel focus without moving the page again
       if (title) title.scrollIntoView({ block: 'start' });
       done.focus({ preventScroll: true });
+      flyTick(done);
       done.querySelector('button').addEventListener('click', () => {
         done.remove();
         if (title) title.textContent = before.title;
