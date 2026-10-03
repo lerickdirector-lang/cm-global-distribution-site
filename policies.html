@@ -20,9 +20,11 @@
   <link rel="preload" href="assets/fonts/hanken-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script>try{var l=localStorage.getItem('cm-lang'),d=document.documentElement;if(l&&l!=='en'){d.lang=l;if(l==='ar')d.dir='rtl';d.classList.add('i18n-wait');setTimeout(function(){d.classList.remove('i18n-wait')},2500)}}catch(e){}</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <svg class="sprite" aria-hidden="true" focusable="false"><defs><symbol id="flag-gb" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><clipPath id="flag-gb-clip"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#flag-gb-clip)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></symbol><symbol id="flag-de" viewBox="0 0 9 6"><rect y="0" width="9" height="2" fill="#000"/><rect y="2" width="9" height="2" fill="#DD0000"/><rect y="4" width="9" height="2" fill="#FFCE00"/></symbol><symbol id="flag-fr" viewBox="0 0 9 6"><rect x="0" width="3" height="6" fill="#002654"/><rect x="3" width="3" height="6" fill="#fff"/><rect x="6" width="3" height="6" fill="#ED2939"/></symbol><symbol id="flag-nl" viewBox="0 0 9 6"><rect y="0" width="9" height="2" fill="#AE1C28"/><rect y="2" width="9" height="2" fill="#fff"/><rect y="4" width="9" height="2" fill="#21468B"/></symbol><symbol id="flag-pl" viewBox="0 0 9 6"><rect y="0" width="9" height="3" fill="#fff"/><rect y="3" width="9" height="3" fill="#DC143C"/></symbol><symbol id="flag-it" viewBox="0 0 9 6"><rect x="0" width="3" height="6" fill="#009246"/><rect x="3" width="3" height="6" fill="#fff"/><rect x="6" width="3" height="6" fill="#CE2B37"/></symbol><symbol id="flag-es" viewBox="0 0 9 6"><rect width="9" height="6" fill="#AA151B"/><rect y="1.5" width="9" height="3" fill="#F1BF00"/></symbol><symbol id="flag-pt" viewBox="0 0 9 6"><rect width="9" height="6" fill="#FF0000"/><rect width="3.6" height="6" fill="#006600"/><circle cx="3.6" cy="3" r="1.05" fill="none" stroke="#FFCC00" stroke-width="0.3"/><path d="M3.1 2.4h1v0.9a0.5 0.5 0 0 1-1 0z" fill="#fff" stroke="#FF0000" stroke-width="0.15"/></symbol><symbol id="flag-cz" viewBox="0 0 9 6"><rect width="9" height="3" fill="#fff"/><rect y="3" width="9" height="3" fill="#D7141A"/><path d="M0 0l4.5 3L0 6z" fill="#11457E"/></symbol><symbol id="flag-ae" viewBox="0 0 9 6"><rect y="0" width="9" height="2" fill="#00732F"/><rect y="2" width="9" height="2" fill="#fff"/><rect y="4" width="9" height="2" fill="#000"/><rect width="2.25" height="6" fill="#FF0000"/></symbol></defs></svg>
 
   <div class="page-head">
     <header class="site-header">
@@ -31,6 +33,23 @@
           <svg viewBox="0 0 104 100" aria-hidden="true"><path d="M87.51 27A44 44 0 1 0 87.51 73L77.69 73A36 36 0 1 1 77.69 27Z" fill="#fff"/><path d="M40 51Q62 34 88 44" fill="none" stroke="#34fcff" stroke-width="6" stroke-linecap="round"/><circle cx="96" cy="48" r="4.5" fill="#34fcff"/><circle cx="31" cy="57" r="11" fill="none" stroke="#fff" stroke-width="3"/><circle cx="31" cy="57" r="5" fill="#fff"/></svg>
           <span class="logo-text"><span>CM Global</span><span>Distribution</span></span>
         </a>
+        <div class="lang-picker">
+          <button class="lang-button" type="button" aria-expanded="false" aria-controls="lang-list" aria-label="Choose a language">
+            <svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-gb"/></svg><span class="lang-code" translate="no">EN</span><svg class="lang-chevron" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="lang-list" id="lang-list" hidden>
+            <li><button type="button" data-lang="en" lang="en"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-gb"/></svg><span translate="no">English</span></button></li>
+            <li><button type="button" data-lang="de" lang="de"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-de"/></svg><span translate="no">Deutsch</span></button></li>
+            <li><button type="button" data-lang="fr" lang="fr"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-fr"/></svg><span translate="no">Français</span></button></li>
+            <li><button type="button" data-lang="nl" lang="nl"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-nl"/></svg><span translate="no">Nederlands</span></button></li>
+            <li><button type="button" data-lang="pl" lang="pl"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-pl"/></svg><span translate="no">Polski</span></button></li>
+            <li><button type="button" data-lang="it" lang="it"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-it"/></svg><span translate="no">Italiano</span></button></li>
+            <li><button type="button" data-lang="es" lang="es"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-es"/></svg><span translate="no">Español</span></button></li>
+            <li><button type="button" data-lang="pt" lang="pt"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-pt"/></svg><span translate="no">Português</span></button></li>
+            <li><button type="button" data-lang="cs" lang="cs"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-cz"/></svg><span translate="no">Čeština</span></button></li>
+            <li><button type="button" data-lang="ar" lang="ar"><svg class="flag" aria-hidden="true" focusable="false"><use href="#flag-ae"/></svg><span translate="no">العربية</span></button></li>
+          </ul>
+        </div>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
         <nav class="menu" id="menu" aria-label="Main">
           <ul>
@@ -72,6 +91,8 @@
             <p>The text, design and images on this site belong to us or the people who licensed them to us. Please don&rsquo;t copy them, or collect data from the site automatically, without our written permission.</p>
             <h3>Accuracy</h3>
             <p>We keep the site accurate and up to date, but product availability, prices and lead times are only confirmed on a quote or order.</p>
+            <h3>Translations</h3>
+            <p>The site can be read in several languages for convenience. If a translation differs from the English, the English version applies.</p>
             <h3>Law</h3>
             <p>These terms are governed by the law of England and Wales.</p>
           </section>
@@ -142,6 +163,7 @@
   </footer>
 
   <a class="btn btn-signal mobile-cta" href="contact.html">Get in touch</a>
+  <script src="i18n.js"></script>
   <script src="site.js"></script>
 </body>
 </html>
