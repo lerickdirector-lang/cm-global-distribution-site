@@ -33,9 +33,9 @@ const SENT_MARK = `<svg class="form-done-mark" viewBox="0 0 180 76" aria-hidden=
           <g class="plane"><use href="#sent-plane"/><circle class="nav-port" cx="-7.6" cy="-14.6" r="0.9"/><circle class="nav-starboard" cx="-7.6" cy="14.6" r="0.9"/><circle class="strobe" cx="-14.9" cy="0" r="0.8"/></g>
         </svg>`;
 
-// ---------- Page not found: the 0 of 404 is a turning globe, with the cargo plane circling it ----------
-// Drawn as wireframe like the home page: the globe turns slowly on its axis, seen from a little
-// above, and the plane flies a tilted orbit, passing behind the globe and back out in front.
+// ---------- Page not found: the 0 of 404 is a slowly turning globe ----------
+// Drawn as wireframe like the home page, seen from a little above. No plane here: a plane circling
+// on a page about something lost reads as an aircraft in trouble.
 (() => {
   const svg = document.querySelector('.lost-globe');
   if (!svg) return;
@@ -68,27 +68,12 @@ const SENT_MARK = `<svg class="form-done-mark" viewBox="0 0 180 76" aria-hidden=
     m.b.setAttribute('d', trace(ring, false)); m.f.setAttribute('d', trace(ring, true));
   });
 
-  // the plane, drawn once and moved between the far and near side of its orbit
-  const plane = document.createElementNS(NS, 'g');
-  plane.setAttribute('class', 'lost-plane');
-  plane.innerHTML = `${PLANE_TOP}<circle class="nav-port" cx="-7.6" cy="-14.6" r="0.9"/><circle class="nav-starboard" cx="-7.6" cy="14.6" r="0.9"/>`;
-  const behind = svg.querySelector('.orbit-back'), ahead = svg.querySelector('.orbit-front');
-  const placePlane = (a) => {
-    const x = 108 * Math.cos(a), y = 30 * Math.sin(a), near = y > 0;
-    const heading = Math.atan2(30 * Math.cos(a), -108 * Math.sin(a)) * 180 / Math.PI;
-    const size = 1.6 + 0.7 * (Math.sin(a) + 1) / 2; // nearer, so larger
-    (near ? ahead : behind).appendChild(plane);
-    plane.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${heading.toFixed(1)}) scale(${size.toFixed(3)})`);
-    plane.style.opacity = near ? 1 : 0.55;
-  };
-
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { drawGlobe(0.4); placePlane(1.2); return; }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { drawGlobe(0.4); return; }
   let t0 = null;
   const frame = (now) => {
     if (t0 === null) t0 = now;
     const s = (now - t0) / 1000;
     drawGlobe(s * (2 * Math.PI / 40)); // one turn every 40 seconds
-    placePlane(1.2 - s * (2 * Math.PI / 9)); // one lap every 9 seconds
     requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
