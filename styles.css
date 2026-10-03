@@ -852,3 +852,11 @@ p .text-link, li .text-link, dd .text-link { padding-block: 12px; }
 
 .side-picker:focus { outline: none; }
 .side-picker:focus-visible { outline: 2px solid var(--halo); outline-offset: 6px; border-radius: 10px; }
+
+/* Page not found: the five places worth going instead */
+.band-lost { padding-top: 0; }
+.lost-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.lost-links a { display: block; height: 100%; padding: 22px 24px; border: 1px solid var(--line-ink); border-radius: 8px; color: var(--on-ink); text-decoration: none; transition: border-color 0.2s, background-color 0.2s; }
+.lost-links a:hover { border-color: rgba(52, 252, 255, 0.5); background: rgba(6, 16, 90, 0.45); }
+.lost-links b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.25rem; }
+.lost-links span { display: block; margin-top: 6px; color: var(--on-ink-soft); }
