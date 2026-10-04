@@ -123,7 +123,6 @@
   "The brands or product types you buy": "Značky nebo typy produktů, které nakupujete",
   "Your typical monthly volume": "Váš obvyklý měsíční objem",
   "How we can help, such as specific lines or timings": "Jak vám můžeme pomoci, například konkrétní položky nebo termíny",
-  "Your company registration and VAT numbers, if you have them to hand": "Registrační číslo společnosti a DIČ, pokud je máte po ruce",
   "Questions trade buyers ask first": "Na co se obchodní odběratelé ptají nejdříve",
   "Which brands are available to account holders?": "Které značky jsou k dispozici držitelům účtů?",
   "Availability changes with each intake, so we don’t publish a brand list. Your price list shows current stock and volumes.": "Dostupnost se mění s každou dodávkou, proto seznam značek nezveřejňujeme. Váš ceník ukazuje aktuální zásoby a objemy.",
@@ -132,7 +131,6 @@
   "Where is your stock sourced from?": "Odkud pochází vaše zboží?",
   "Directly from brands, and from distributors a brand has appointed. If a line can’t be traced back to the brand, we don’t buy it.": "Přímo od značek a od distributorů, které značka jmenovala. Pokud položku nelze dohledat zpět ke značce, nenakupujeme ji.",
   "Looking for a trade account?": "Hledáte obchodní účet?",
-  "Tell us what you buy and in what volumes. Company details can follow before your account opens.": "Sdělte nám, co nakupujete a v jakých objemech. Údaje o společnosti můžete doplnit před otevřením účtu.",
   "Prefer to email?": "Dáváte přednost e-mailu?",
   "© 2026 Crep Millions LTD.": "© 2026 Crep Millions LTD.",
   "For brands | CM Global Distribution": "Pro značky | CM Global Distribution",
@@ -431,5 +429,7 @@
   "To enquire: your name, email, company name and company registration number, your type of business, what you buy, a rough monthly volume, and a line on how we can help. Your VAT number is optional at that stage, and we’ll ask for it before the account opens if it’s missing.": "K poptávce: vaše jméno, e-mail, název firmy a registrační číslo, typ podnikání, co nakupujete, přibližný měsíční objem a větu o tom, jak můžeme pomoci. DIČ je v této fázi nepovinné; pokud chybí, vyžádáme si ho před otevřením účtu.",
   "Yes. Every invoice carries our VAT number, GB 522 7677 76, and itemises the goods and any delivery charge. Nothing is added once a quote is agreed.": "Ano. Každá faktura nese naše DIČ GB 522 7677 76 a rozepisuje zboží i případné poplatky za doručení. Po odsouhlasení nabídky se nic nepřidává.",
   "A delivery note and an invoice. Supplier and provenance documents are available on request.": "Dodací list a faktura. Doklady dodavatele a o původu jsou k dispozici na vyžádání.",
-  "Buying": "Nákup"
+  "Buying": "Nákup",
+  "Your company registration number, and your VAT number if you have it to hand": "Registrační číslo vaší firmy a DIČ, pokud ho máte po ruce",
+  "Tell us what you buy and in what volumes, with your company registration number.": "Napište nám, co a v jakých objemech nakupujete, spolu s registračním číslem firmy."
 }

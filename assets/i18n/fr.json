@@ -123,7 +123,6 @@
   "The brands or product types you buy": "Les marques ou types de produits que vous achetez",
   "Your typical monthly volume": "Votre volume mensuel habituel",
   "How we can help, such as specific lines or timings": "Comment nous pouvons vous aider, par exemple sur des références ou des délais précis",
-  "Your company registration and VAT numbers, if you have them to hand": "Vos numéros d’immatriculation et de TVA, si vous les avez à portée de main",
   "Questions trade buyers ask first": "Les premières questions des acheteurs professionnels",
   "Which brands are available to account holders?": "Quelles marques sont disponibles pour les titulaires de compte ?",
   "Availability changes with each intake, so we don’t publish a brand list. Your price list shows current stock and volumes.": "Les disponibilités évoluent à chaque arrivage, c’est pourquoi nous ne publions pas de liste de marques. Votre liste de prix indique le stock et les volumes actuels.",
@@ -132,7 +131,6 @@
   "Where is your stock sourced from?": "D’où provient votre stock ?",
   "Directly from brands, and from distributors a brand has appointed. If a line can’t be traced back to the brand, we don’t buy it.": "Directement des marques, et des distributeurs désignés par une marque. Si une référence ne peut pas être tracée jusqu’à la marque, nous ne l’achetons pas.",
   "Looking for a trade account?": "Vous cherchez un compte professionnel ?",
-  "Tell us what you buy and in what volumes. Company details can follow before your account opens.": "Indiquez-nous ce que vous achetez et en quels volumes. Les informations sur votre société peuvent suivre avant l’ouverture de votre compte.",
   "Prefer to email?": "Vous préférez l’e-mail ?",
   "© 2026 Crep Millions LTD.": "© 2026 Crep Millions LTD.",
   "For brands | CM Global Distribution": "Pour les marques | CM Global Distribution",
@@ -431,5 +429,7 @@
   "To enquire: your name, email, company name and company registration number, your type of business, what you buy, a rough monthly volume, and a line on how we can help. Your VAT number is optional at that stage, and we’ll ask for it before the account opens if it’s missing.": "Pour une demande : votre nom, votre e-mail, le nom de votre société et son numéro d’immatriculation, votre type d’activité, ce que vous achetez, un volume mensuel approximatif, et une ligne sur la façon dont nous pouvons vous aider. Votre numéro de TVA est facultatif à ce stade ; s’il manque, nous vous le demanderons avant l’ouverture du compte.",
   "Yes. Every invoice carries our VAT number, GB 522 7677 76, and itemises the goods and any delivery charge. Nothing is added once a quote is agreed.": "Oui. Chaque facture porte notre numéro de TVA, GB 522 7677 76, et détaille les marchandises ainsi que les éventuels frais de livraison. Rien n’est ajouté une fois le devis accepté.",
   "A delivery note and an invoice. Supplier and provenance documents are available on request.": "Un bon de livraison et une facture. Les documents fournisseur et de provenance sont disponibles sur demande.",
-  "Buying": "Achats"
+  "Buying": "Achats",
+  "Your company registration number, and your VAT number if you have it to hand": "Le numéro d’immatriculation de votre société, et votre numéro de TVA si vous l’avez sous la main",
+  "Tell us what you buy and in what volumes, with your company registration number.": "Dites-nous ce que vous achetez et en quels volumes, avec le numéro d’immatriculation de votre société."
 }

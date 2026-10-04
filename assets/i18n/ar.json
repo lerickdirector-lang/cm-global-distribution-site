@@ -123,7 +123,6 @@
   "The brands or product types you buy": "العلامات التجارية أو أنواع المنتجات التي تشترونها",
   "Your typical monthly volume": "حجم مشترياتكم الشهري المعتاد",
   "How we can help, such as specific lines or timings": "كيف يمكننا المساعدة، مثل أصناف أو مواعيد محددة",
-  "Your company registration and VAT numbers, if you have them to hand": "رقم السجل التجاري لشركتكم ورقم ضريبة القيمة المضافة، إن كانا متوفرين لديكم",
   "Questions trade buyers ask first": "أول ما يسأل عنه المشترون التجاريون",
   "Which brands are available to account holders?": "ما العلامات التجارية المتاحة لأصحاب الحسابات؟",
   "Availability changes with each intake, so we don’t publish a brand list. Your price list shows current stock and volumes.": "يتغير التوفر مع كل دفعة واردة، لذا لا ننشر قائمة بالعلامات التجارية. وتعرض قائمة أسعاركم المخزون والكميات الحالية.",
@@ -132,7 +131,6 @@
   "Where is your stock sourced from?": "من أين يأتي مخزونكم؟",
   "Directly from brands, and from distributors a brand has appointed. If a line can’t be traced back to the brand, we don’t buy it.": "مباشرة من العلامات التجارية، ومن الموزعين الذين عيّنتهم العلامة التجارية. وإذا تعذّر تتبع صنف حتى العلامة التجارية، فلا نشتريه.",
   "Looking for a trade account?": "تبحثون عن حساب تجاري؟",
-  "Tell us what you buy and in what volumes. Company details can follow before your account opens.": "أخبرونا بما تشترونه وبأي كميات. ويمكن إرسال بيانات الشركة لاحقًا قبل فتح حسابكم.",
   "Prefer to email?": "تفضلون البريد الإلكتروني؟",
   "© 2026 Crep Millions LTD.": "© 2026 Crep Millions LTD.",
   "For brands | CM Global Distribution": "للعلامات التجارية | CM Global Distribution",
@@ -431,5 +429,7 @@
   "To enquire: your name, email, company name and company registration number, your type of business, what you buy, a rough monthly volume, and a line on how we can help. Your VAT number is optional at that stage, and we’ll ask for it before the account opens if it’s missing.": "للاستفسار: اسمكم وبريدكم الإلكتروني واسم الشركة ورقم تسجيلها، ونوع نشاطكم، وما تشترونه، وحجمًا شهريًا تقريبيًا، وسطرًا عن كيفية مساعدتكم. رقم ضريبة القيمة المضافة اختياري في تلك المرحلة، وسنطلبه قبل فتح الحساب إن لم يكن متوفرًا.",
   "Yes. Every invoice carries our VAT number, GB 522 7677 76, and itemises the goods and any delivery charge. Nothing is added once a quote is agreed.": "نعم. تحمل كل فاتورة رقم ضريبة القيمة المضافة الخاص بنا GB 522 7677 76، وتفصّل البضائع وأي رسوم توصيل. ولا يُضاف شيء بعد الموافقة على عرض السعر.",
   "A delivery note and an invoice. Supplier and provenance documents are available on request.": "إشعار تسليم وفاتورة. وتتوفر مستندات المورّد والمنشأ عند الطلب.",
-  "Buying": "الشراء"
+  "Buying": "الشراء",
+  "Your company registration number, and your VAT number if you have it to hand": "رقم تسجيل شركتكم، ورقم ضريبة القيمة المضافة إن كان متوفرًا لديكم",
+  "Tell us what you buy and in what volumes, with your company registration number.": "أخبرونا بما تشترونه وبأي كميات، مع رقم تسجيل شركتكم."
 }

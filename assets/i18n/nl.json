@@ -123,7 +123,6 @@
   "The brands or product types you buy": "De merken of productsoorten die u inkoopt",
   "Your typical monthly volume": "Uw gebruikelijke maandvolume",
   "How we can help, such as specific lines or timings": "Hoe wij u kunnen helpen, zoals specifieke artikelen of termijnen",
-  "Your company registration and VAT numbers, if you have them to hand": "Uw inschrijvings- en btw-nummer, als u die bij de hand heeft",
   "Questions trade buyers ask first": "Eerste vragen van zakelijke inkopers",
   "Which brands are available to account holders?": "Welke merken zijn beschikbaar voor accounthouders?",
   "Availability changes with each intake, so we don’t publish a brand list. Your price list shows current stock and volumes.": "De beschikbaarheid wisselt met elke nieuwe levering, dus wij publiceren geen merkenlijst. Uw prijslijst toont de actuele voorraad en volumes.",
@@ -132,7 +131,6 @@
   "Where is your stock sourced from?": "Waar wordt uw voorraad ingekocht?",
   "Directly from brands, and from distributors a brand has appointed. If a line can’t be traced back to the brand, we don’t buy it.": "Rechtstreeks bij merken, en bij distributeurs die een merk heeft aangesteld. Als een artikel niet tot het merk kan worden herleid, kopen wij het niet in.",
   "Looking for a trade account?": "Op zoek naar een zakelijk account?",
-  "Tell us what you buy and in what volumes. Company details can follow before your account opens.": "Laat ons weten wat u inkoopt en in welke volumes. Bedrijfsgegevens kunnen volgen voordat uw account wordt geopend.",
   "Prefer to email?": "Liever per e-mail?",
   "© 2026 Crep Millions LTD.": "© 2026 Crep Millions LTD.",
   "For brands | CM Global Distribution": "Voor merken | CM Global Distribution",
@@ -431,5 +429,7 @@
   "To enquire: your name, email, company name and company registration number, your type of business, what you buy, a rough monthly volume, and a line on how we can help. Your VAT number is optional at that stage, and we’ll ask for it before the account opens if it’s missing.": "Voor een aanvraag: uw naam, e-mailadres, bedrijfsnaam en KvK-nummer, uw type bedrijf, wat u inkoopt, een globaal maandvolume en een regel over hoe wij kunnen helpen. Uw btw-nummer is in die fase optioneel; ontbreekt het, dan vragen wij erom voordat het account wordt geopend.",
   "Yes. Every invoice carries our VAT number, GB 522 7677 76, and itemises the goods and any delivery charge. Nothing is added once a quote is agreed.": "Ja. Elke factuur vermeldt ons btw-nummer, GB 522 7677 76, en specificeert de goederen en eventuele leveringskosten. Na akkoord op een offerte komt er niets meer bij.",
   "A delivery note and an invoice. Supplier and provenance documents are available on request.": "Een pakbon en een factuur. Leveranciers- en herkomstdocumenten zijn op verzoek beschikbaar.",
-  "Buying": "Inkoop"
+  "Buying": "Inkoop",
+  "Your company registration number, and your VAT number if you have it to hand": "Uw KvK-nummer, en uw btw-nummer als u dat bij de hand hebt",
+  "Tell us what you buy and in what volumes, with your company registration number.": "Laat ons weten wat u inkoopt en in welke volumes, samen met uw KvK-nummer."
 }
