@@ -609,6 +609,12 @@ void main() {
   };
   const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(applyScroll); } };
 
+  // The night images load as WebP, about half the size of the JPEGs; a browser that can't read
+  // WebP falls back to the JPEG of the same picture
+  const load = (image, src) => {
+    image.onerror = () => { image.onerror = null; image.src = src; };
+    image.src = src.replace(/\.jpg$/, '.webp');
+  };
   const img = new Image();
   img.decoding = 'async';
   img.onload = () => {
@@ -689,7 +695,7 @@ void main() {
         camDirty = true;
         kick();
       };
-      near.src = NEAR.src;
+      load(near, NEAR.src);
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -706,5 +712,5 @@ void main() {
     // size without the window reporting a resize, and it should appear at once when it does
     if ('ResizeObserver' in window) new ResizeObserver(() => requestAnimationFrame(resized)).observe(stage);
   };
-  img.src = TEX.src;
+  load(img, TEX.src);
 })();

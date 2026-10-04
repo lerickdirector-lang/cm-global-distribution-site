@@ -16,8 +16,6 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#00052e">
-  <link rel="preload" href="assets/fonts/hanken-grotesk-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/hanken-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
@@ -100,9 +98,8 @@
             <p class="error" id="email-error" role="alert"></p>
           </div>
           <div class="field">
-            <label for="phone">Phone</label>
-            <input id="phone" name="phone" aria-describedby="phone-hint phone-error" type="tel" autocomplete="tel">
-            <p class="hint" id="phone-hint">Optional</p>
+            <label for="phone">Phone (optional)</label>
+            <input id="phone" name="phone" aria-describedby="phone-error" type="tel" autocomplete="tel">
             <p class="error" id="phone-error" role="alert"></p>
           </div>
         </div>
@@ -122,9 +119,8 @@
           </div>
         </div>
         <div class="field">
-            <label for="website">Website</label>
-            <input id="website" name="website" aria-describedby="website-hint" type="url" autocomplete="url" inputmode="url" placeholder="https://">
-            <p class="hint" id="website-hint">Optional</p>
+            <label for="website">Website (optional)</label>
+            <input id="website" name="website" type="url" autocomplete="url" inputmode="url" placeholder="https://">
           </div>
 
         <div class="side-fields" data-side="trade" hidden>
@@ -141,9 +137,8 @@
             <p class="error" id="enquiry_type-error" role="alert"></p>
           </div>
           <div class="field">
-            <label for="vat_number">VAT number</label>
-            <input id="vat_number" name="vat_number" aria-describedby="vat_number-hint" type="text">
-            <p class="hint" id="vat_number-hint">Optional</p>
+            <label for="vat_number">VAT number (optional)</label>
+            <input id="vat_number" name="vat_number" type="text">
           </div>
         </div>
           <h2 class="form-part">Buying</h2>
@@ -244,7 +239,7 @@
           <a class="footer-mail" href="mailto:info@cmglobaldistribution.co.uk">info@cmglobaldistribution.co.uk</a>
         </div>
         <nav aria-label="Footer">
-          <h2 class="footer-h">Pages</h2>
+          <p class="footer-h">Pages</p>
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="trade.html">For buyers</a></li>

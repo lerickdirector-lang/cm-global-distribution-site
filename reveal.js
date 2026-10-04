@@ -50,7 +50,8 @@
 })();
 
 // Home: the headline builds itself letter by letter when the page opens. "Authorised" first,
-// then "branded stock", each letter rising out of a soft blur just after the one before.
+// then "branded stock.", each letter rising out of a soft blur just after the one before, and
+// "Authorised" then settles from the light cut into its bold one.
 // The page's own script only holds the headline back when motion is welcome; if GSAP is
 // missing, a CSS fallback reveals it after a moment. Screen readers read the heading's
 // label throughout, since the split letters sit inside parts they already skip.
@@ -61,6 +62,8 @@
   if (!window.gsap || !window.SplitText) return;
   gsap.registerPlugin(SplitText);
   document.fonts.ready.then(() => {
+    const word = title.querySelector('.hero-word');
+    word?.classList.add('is-arriving'); // "Authorised" lands in the light cut, then settles bold
     const split = SplitText.create(title.querySelectorAll('.hero-word, .hero-main'), { type: 'words,chars', aria: 'none' });
     root.classList.add('hero-building'); // the rest of the hero now waits for the letters
     root.classList.remove('hero-letters');
@@ -79,6 +82,7 @@
       lazy: false,
       onComplete: () => {
         split.revert(); // back to plain text once every letter has landed
+        setTimeout(() => word?.classList.remove('is-arriving'), 250);
       },
     });
   });
