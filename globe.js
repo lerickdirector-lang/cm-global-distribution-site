@@ -53,8 +53,6 @@
     ['Birmingham', 'Bristol'], ['Bristol', 'Cardiff'], ['Leeds', 'Newcastle'], ['Newcastle', 'Edinburgh'],
     ['Edinburgh', 'Glasgow'], ['Liverpool', 'Belfast'], ['Glasgow', 'Belfast'], ['Birmingham', 'Nottingham'],
     ['Southampton', 'Bristol'], ['Nottingham', 'Leeds'], ['Liverpool', 'Manchester']];
-  const LABELLED = new Set(['Paris', 'Amsterdam', 'Berlin', 'Madrid', 'Milan', 'Warsaw', 'Stockholm', 'Rome',
-    'Vienna', 'Lisbon', 'Athens', 'Manchester', 'Dublin', 'Edinburgh', 'Brussels']);
   const EUROPE_CENTRE = [10, 48]; // southern Germany, the middle of the network
 
   let seed = 11;
@@ -305,7 +303,7 @@ void main() {
     cpuBase.getContext('2d').putImageData(out, 0, 0);
   };
 
-  // ---------- Routes, London and labels ----------
+  // ---------- Routes and London ----------
   // part: 'all' draws everything; 'static' only the line and its landing light; 'moving' only the lights travelling along it
   const drawRoute = (r, drawn, t, part = 'all') => {
     const pts = r.pts, n = pts.length - 1;
@@ -403,53 +401,12 @@ void main() {
     return fracOf(markers[markers.length - 1]);
   };
 
-  // City names appear as each route lands
-  // Names are placed one at a time; a name that would sit on top of one already placed, or
-  // under the header bar, is left out rather than drawn as a jumble. London goes first.
-  const HEADER_CLEAR = 104;
-  const drawLabels = (p) => {
-    ctx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace';
-    ctx.textBaseline = 'middle';
-    const placed = [];
-    if (hub) placed.push({ x0: hub.x + 14, x1: hub.x + 14 + ctx.measureText('LONDON').width, y0: hub.y - 30, y1: hub.y - 14 });
-    // Keep names out from behind the hero's headline and buttons while they are on screen
-    const copy = document.querySelector('.scene-copy');
-    if (copy) { const r = copy.getBoundingClientRect(); if (r.bottom > 0 && r.height > 0) placed.push({ x0: r.left, x1: r.right, y0: r.top, y1: r.bottom }); }
-    // and from behind the big headlines
-    document.querySelectorAll('.big-title').forEach((t) => { const r = t.getBoundingClientRect(); if (r.bottom > 0 && r.top < H) placed.push({ x0: r.left, x1: r.right, y0: r.top, y1: r.bottom }); });
-    const clear = (b) => b.y0 >= HEADER_CLEAR && placed.every((q) => b.x1 < q.x0 - 6 || b.x0 > q.x1 + 6 || b.y1 < q.y0 - 4 || b.y0 > q.y1 + 4);
-    routes.forEach((r) => {
-      if (!LABELLED.has(r.n)) return;
-      const a = ease((p - r.start - 0.18) / 0.06);
-      if (a <= 0) return;
-      const e = r.pts[r.pts.length - 1];
-      if (e.x < -40 || e.x > W || e.y < 0 || e.y > H) return;
-      const label = r.n.toUpperCase();
-      const w = ctx.measureText(label).width;
-      // To the right of its city, or to the left if the right edge is too close
-      let box = { x0: e.x + 8, x1: e.x + 8 + w, y0: e.y - 8, y1: e.y + 8 }, right = true;
-      if (box.x1 > W - 6 || !clear(box)) { box = { x0: e.x - 8 - w, x1: e.x - 8, y0: e.y - 8, y1: e.y + 8 }; right = false; }
-      if (box.x0 < 6 || !clear(box)) return;
-      placed.push(box);
-      ctx.textAlign = right ? 'left' : 'right';
-      // A navy outline under each name, so the route lines never strike it through
-      ctx.lineJoin = 'round'; ctx.lineWidth = 4; ctx.strokeStyle = `rgba(0,5,46,${0.9 * a})`;
-      ctx.strokeText(label, right ? e.x + 8 : e.x - 8, e.y);
-      ctx.fillStyle = `rgba(214,220,245,${0.85 * a})`;
-      ctx.fillText(label, right ? e.x + 8 : e.x - 8, e.y);
-    });
-    ctx.textAlign = 'left';
-  };
 
-  // Once every route has landed, the lines, landing lights and city names only change when
-  // the camera moves. They are painted once into this layer and copied each frame, so a
+  // Once every route has landed, the lines and landing lights only change when the camera
+  // moves. They are painted once into this layer and copied each frame, so a
   // frame only has to draw the travelling lights and London's glow.
   let staticLayer = null, staticDirty = true, lastDraw = 0, lastT = 0;
   const FINAL_P = 0.84;
-  // City names belong to the opening view. Once the visitor has scrolled on, they are left out,
-  // so they never sit across the big headlines or the text over the globe further down.
-  const labelsWanted = () => window.scrollY < H * 0.6;
-  let labelsShown = true;
   const buildStatic = () => {
     if (!staticLayer) staticLayer = document.createElement('canvas');
     staticLayer.width = canvas.width; staticLayer.height = canvas.height;
@@ -462,8 +419,6 @@ void main() {
     ctx.lineJoin = 'round';
     routes.forEach((r) => drawRoute(r, ease((FINAL_P - r.start) / 0.2), 0, 'static'));
     ctx.restore();
-    labelsShown = labelsWanted();
-    if (labelsShown) drawLabels(FINAL_P);
     ctx = screenCtx;
     staticDirty = false;
   };
@@ -541,7 +496,6 @@ void main() {
     if (!gl && cpuBase) ctx.drawImage(cpuBase, 0, 0, canvas.width, canvas.height);
     const settled = intro >= 1;
     if (settled) {
-      if (labelsWanted() !== labelsShown) staticDirty = true;
       if (staticDirty) buildStatic();
       ctx.drawImage(staticLayer, 0, 0);
     }
@@ -563,15 +517,6 @@ void main() {
     ctx.beginPath(); ctx.arc(hub.x, hub.y, hr, 0, Math.PI * 2); ctx.fill();
     ctx.restore();
 
-    if (!settled) { labelsShown = labelsWanted(); if (labelsShown) drawLabels(p); }
-    ctx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace';
-    ctx.textBaseline = 'middle';
-    ctx.lineJoin = 'round'; ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(0,5,46,0.9)';
-    if (labelsShown) {
-      ctx.strokeText('LONDON', hub.x + 14, hub.y - 22);
-      ctx.fillStyle = 'rgba(240,255,255,0.95)';
-      ctx.fillText('LONDON', hub.x + 14, hub.y - 22);
-    }
 
     if (!reduceMotion) rafId = requestAnimationFrame(frame); // browsers pause this in background tabs
   };
